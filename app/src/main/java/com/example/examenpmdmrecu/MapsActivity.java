@@ -45,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference myRef;
     private Timestamp time;
     Marker marcador;
-    Boolean activar;
+    Boolean activar= false;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -77,7 +77,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
         });
-        checkearPermiso();
     }
 
 /*
@@ -105,9 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Ciudades c = new Ciudades(lat,lng);
 
             LatLng ciudadAct = new LatLng(c.getLat(), c.getLng());
-
             marcador = mMap.addMarker(new MarkerOptions().position(ciudadAct));
-
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ciudadAct, 5.5f));
             GoogleMap.OnMarkerClickListener oyente_marcador = new GoogleMap.OnMarkerClickListener() {
                 @Override
@@ -156,7 +153,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationChanged(@NonNull Location location) {
                 while (activar == true) {
-                    anadir(location);
+                   anadir(location);
                 }
             }
         };
@@ -185,20 +182,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         };
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void checkearPermiso()
-    {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            guardar.setEnabled(false);
-
-        }
-        else{
-            Log.d("PERMISO","Ya tengo permiso y no hago nada!!");
-            guardar.setEnabled(true);
-        }
     }
 
 
