@@ -28,9 +28,14 @@ import java.util.ArrayList;
         @Override
         public void onBindViewHolder(@NonNull MiContenedorDeVistas holder, int position) {
             Ciudades c = lista_ciudades.get(position);
-            holder.lat.setText.Double.ParseDouble(c.getLat());
-            holder.lang.setText(c.getLang());
-            //holder.timestamp.setText(c.getTimestamp());
+            String lat = String.valueOf(c.getLat());
+            String lng = String.valueOf(c.getLng());
+            String fechaa= String.valueOf(c.getFecha());
+            holder.lat.setText(lat);
+            holder.lang.setText(lng);
+
+
+            //holder.timestamp.setText(c.getTimestamp()); fechaa*
         }
 
         @Override

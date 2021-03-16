@@ -19,44 +19,46 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ListaCoordenadas  extends AppCompatActivity {
-        ArrayList<Ciudades> lista = new ArrayList<>();
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.recycler_coordenadas);
+    ArrayList<Ciudades> lista = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.recycler_coordenadas);
 
 
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("Ciudades");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Ciudades");
 
-            myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    Iterable<DataSnapshot> data = snapshot.getChildren();
-                    for(DataSnapshot d: data){
-                        Ciudades c= d.getValue(Ciudades.class);
-                        lista.add(c);
-                        Log.d("bi", lista.toString());
-                        //mostrar();
-                    }
-
+                Iterable<DataSnapshot> data = snapshot.getChildren();
+                for (DataSnapshot d : data) {
+                    Ciudades c = d.getValue(Ciudades.class);
+                    lista.add(c);
+                    Log.d("bi", lista.toString());
+                    mostrar();
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.d("bi", error.getDetails());
-                }
-            });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("bi", error.getDetails());
+            }
+        });
 
 
-        }/*
-        private void mostrar(){
-            RecyclerView rec = findViewById(R.id.mi_reycler);
-            RecyclerView.LayoutManager gestor = new LinearLayoutManager(this);
-            MiAdaptador adaptador = new MiAdaptador(lista);
-            rec.setLayoutManager(gestor);
-            rec.setAdapter(adaptador);*/
-        }
+    }
 
+    private void mostrar() {
+        RecyclerView rec = findViewById(R.id.mi_reycler);
+        RecyclerView.LayoutManager gestor = new LinearLayoutManager(this);
+        MiAdaptador adaptador = new MiAdaptador(lista);
+        rec.setLayoutManager(gestor);
+        rec.setAdapter(adaptador);
+    }
+}
 

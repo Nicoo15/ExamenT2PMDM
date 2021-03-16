@@ -5,8 +5,15 @@ import android.widget.EditText;
 
 public class Ciudades {
     private Double lat, lng;
+    String fecha;
 
-    public Ciudades(EditText lat, EditText lng) {
+    public Ciudades() {
+    }
+
+    public Ciudades(Double lat, Double lng, String fecha) {
+        this.lat = lat;
+        this.lng = lng;
+        this.fecha = fecha;
     }
 
     public Double getLat() {
@@ -17,7 +24,9 @@ public class Ciudades {
         return lng;
     }
 
-
+    public String getFecha() {
+        return fecha;
+    }
 
     public void setLat(Double lat) {
         this.lat = lat;
@@ -27,19 +36,17 @@ public class Ciudades {
         this.lng = lng;
     }
 
-
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
     @Override
     public String toString() {
-        return "Ciudad{" +
+        return "Ciudades{" +
                 "lat=" + lat +
                 ", lng=" + lng +
+                ", fecha='" + fecha + '\'' +
                 '}';
     }
-
-    public Ciudades(Double lat, Double lng) {
-        this.lat = lat;
-        this.lng = lng;
-
-    }
 }
+
